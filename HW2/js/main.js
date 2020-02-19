@@ -15,6 +15,9 @@ window.onload = function() {
     function preload() {
         // Load an image and call it 'logo'.
         game.load.image( 'logo', 'assets/phaser.png' );
+
+	game.load.audio( 'bass', 'assets/bd.wav' );
+	game.load.audio( 'snare', 'assets/sn.wav' );
     }
     
     var bouncy;
@@ -36,6 +39,22 @@ window.onload = function() {
         var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
         var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
         text.anchor.setTo( 0.5, 0.0 );
+
+	keys = game.input.keyboard.addKeys({
+            'Bass': Phaser.Input.Keyboard.KeyCodes.B,
+            'Snare': Phaser.Input.Keyboard.KeyCodes.G,
+        });
+
+	var bd = game.sound.add('bass');
+	var sn = game.sound.add('snare');
+
+	this.input.keyboard.on('keydown_B', function (event) {
+             bd.play();
+        });
+
+        this.input.keyboard.on('keydown_G', function (event) {
+             sn.play();
+        });
     }
     
     function update() {
