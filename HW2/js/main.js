@@ -41,8 +41,8 @@ window.onload = function() {
         text.anchor.setTo( 0.5, 0.0 );
 
 	keys = game.input.keyboard.addKeys({
-            'Bass': Phaser.Input.Keyboard.KeyCodes.B,
-            'Snare': Phaser.Input.Keyboard.KeyCodes.G,
+            'Bass': Phaser.Keyboard.KeyCodes.B,
+            'Snare': Phaser.Keyboard.KeyCodes.G,
         });
 
 	var bd = game.sound.add('bass');
