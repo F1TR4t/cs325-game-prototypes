@@ -12,12 +12,26 @@ window.onload = function() {
     
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
+    var keys;
+    var bd;
+    var sn;
+    var ch;
+    var oh;
+    var lmt;
+    var mt;
+    var lt;
+
     function preload() {
         // Load an image and call it 'logo'.
         game.load.image( 'logo', 'assets/phaser.png' );
 
 	game.load.audio( 'bass', 'assets/bd.wav' );
 	game.load.audio( 'snare', 'assets/sn.wav' );
+	game.load.audio( 'close', 'assets/ch.wav' );
+	game.load.audio( 'open', 'assets/oh.wav' );
+	game.load.audio( 'lemt', 'assets/lmt.wav' );
+	game.load.audio( 'ment', 'assets/mt.wav' );
+	game.load.audio( 'lent', 'assets/lt.wav' );
     }
     
     var bouncy;
@@ -40,21 +54,15 @@ window.onload = function() {
         var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
         text.anchor.setTo( 0.5, 0.0 );
 
-	keys = game.input.keyboard.addKeys({
-            'Bass': Phaser.Keyboard.KeyCodes.B,
-            'Snare': Phaser.Keyboard.KeyCodes.G,
-        });
+	bd = game.sound.add('bass');
+	sn = game.sound.add('snare');
+	ch = game.sound.add('close');
+	oh = game.sound.add('open');
+	lmt = game.sound.add('lemt');
+	mt = game.sound.add('ment');
+	lt = game.sound.add('lent');
 
-	var bd = game.sound.add('bass');
-	var sn = game.sound.add('snare');
-
-	this.input.keyboard.on('keydown_B', function (event) {
-             bd.play();
-        });
-
-        this.input.keyboard.on('keydown_G', function (event) {
-             sn.play();
-        });
+	keys = game.input.keyboard;
     }
     
     function update() {
@@ -64,5 +72,33 @@ window.onload = function() {
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
         bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
+
+	if ( keys.isDown(Phaser.KeyCode.B) ) {
+		bd.play();
+	}
+
+	if ( keys.isDown(Phaser.KeyCode.G) ) {
+		sn.play();
+	}
+
+	if (keys.isDown(Phaser.KeyCode.N) ) {
+		lt.play();
+	}
+
+	if (keys.isDown(Phaser.KeyCode.H) ) {
+		lmt.play();
+	}
+
+	if (keys.isDown(Phaser.KeyCode.J) ) {
+		mt.play();
+	}
+
+	if (keys.isDown(Phaser.KeyCode.T) ) {
+		ch.play();
+	}
+
+	if (keys.isDown(Phaser.KeyCode.Y) ) {
+		oh.play();
+	}
     }
 };
