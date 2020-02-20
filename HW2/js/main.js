@@ -23,7 +23,7 @@ window.onload = function() {
 
     function preload() {
         // Load an image and call it 'logo'.
-        game.load.image( 'logo', 'assets/phaser.png' );
+        game.load.image( 'drum', 'assets/drums.png' );
 
 	game.load.audio( 'bass', 'assets/bd.wav' );
 	game.load.audio( 'snare', 'assets/sn.wav' );
@@ -34,25 +34,24 @@ window.onload = function() {
 	game.load.audio( 'lent', 'assets/lt.wav' );
     }
     
-    var bouncy;
+    var drums;
     
     function create() {
         // Create a sprite at the center of the screen using the 'logo' image.
-        bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'logo' );
+        drums = game.add.sprite( game.world.centerX, game.world.centerY, 'drum' );
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
-        bouncy.anchor.setTo( 0.5, 0.5 );
-        
-        // Turn on the arcade physics engine for this sprite.
-        game.physics.enable( bouncy, Phaser.Physics.ARCADE );
-        // Make it bounce off of the world bounds.
-        bouncy.body.collideWorldBounds = true;
+        drums.anchor.setTo( 0.5, 0.4 );
         
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
-        var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
+        var style = { font: "25px Andale Mono", fill: "#ffffff", align: "left" };
+        var text = game.add.text( game.world.centerX, 10, "B for Bass Drum\t\t\t\tN for Low Tom\t\t\t\tG for Snare\n", style );
+	var textTwo = game.add.text( game.world.centerX, 5, "H for Mid Tom\t\t\t\tJ for Low Mid Tom\n", style );
+	var textThre = game.add.text( game.world.centerX, 35, "T for Closed Hat\t\t\t\tY for Open Hat", style );
         text.anchor.setTo( 0.5, 0.0 );
+	textTwo.anchor.setTo( 0.5, -0.5);
+	textThre.anchor.setTo( 0.5, -1.0);
 
 	bd = game.sound.add('bass');
 	sn = game.sound.add('snare');
@@ -66,13 +65,6 @@ window.onload = function() {
     }
     
     function update() {
-        // Accelerate the 'logo' sprite towards the cursor,
-        // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
-        // in X or Y.
-        // This function returns the rotation angle that makes it visually match its
-        // new trajectory.
-        bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
-
 	if ( keys.isDown(Phaser.KeyCode.B) ) {
 		bd.play();
 	}
