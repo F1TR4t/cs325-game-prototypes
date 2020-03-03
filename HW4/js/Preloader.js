@@ -25,18 +25,14 @@ GameStates.makePreloader = function( game ) {
     
             //	Here we load the rest of the assets our game needs.
             //	As this is just a Project Template I've not provided these assets, swap them for your own.
-            game.load.image('red', 'assets/red.png');
-	    game.load.image('blue', 'assets/blue.png');
-	    game.load.image('gre', 'assets/gre.png');
-	    game.load.image('purp', 'assets/purp.png');
-	    game.load.image('yel', 'assets/yel.png');
-	    game.load.image('ora', 'assets/ora.png');
+            game.load.image('lam', 'assets/lamblog.png');
+	    game.load.image('fer', 'assets/ferlogo.png');
             game.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
-	    game.load.image('up', 'assets/arrup.png');
-	    game.load.image('dwn', 'assets/arrdwn.png');
             game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
             //	+ lots of other required assets here
-            game.load.image( 'car', 'assets/car.jpeg' );
+            game.load.image( 'lambo', 'assets/lambo.png' );
+	    game.load.image( 'ferr', 'assets/ferrari.png' );
+	    game.load.audio('bgmusic', 'assets/1011.mp3');
         },
     
         create: function () {

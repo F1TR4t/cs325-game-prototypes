@@ -1,13 +1,14 @@
 "use strict";
 
+var p1Cnt;
+
 GameStates.makeMainMenu = function( game, shared ) {
 
 	var music = null;
 	var playButton = null;
-	var uparr = null;
-	var dwnarr = null;
-	var p1 = null;
-	var p1Cnt = 0;
+	var lambopic = null;
+	var ferrpic = null;
+	p1Cnt = 0;
     
     function startGame(pointer) {
 
@@ -19,49 +20,12 @@ GameStates.makeMainMenu = function( game, shared ) {
 
     }
 
-    function colUp() {
-	
-	if ( p1Cnt == 0 ) {
-	    p1 = game.add.image(150, 260, 'blue');
-	    p1Cnt++;
-	} else if ( p1Cnt == 1 ) {
-	    p1 = game.add.image(150, 260, 'gre');
-	    p1Cnt++;
-	} else if ( p1Cnt == 2 ) {
-	    p1 = game.add.image(150, 260, 'yel');
-	    p1Cnt++;
-	} else if ( p1Cnt == 3 ) {
-	    p1 = game.add.image(150, 260, 'ora');
-	    p1Cnt++;
-	} else if ( p1Cnt == 4 ) {
-	    p1 = game.add.image(150, 260, 'purp');
-	    p1Cnt++;
-	} else {
-	    p1 = game.add.image(150, 260, 'red');
-	    p1Cnt = 0;
-	}
+    function chooseLambo(pointer) {
+	p1Cnt = 0;
     }
 
-    function colDwn() {
-	if ( p1Cnt == 1 ) {
-	    p1 = game.add.image(150, 260, 'red');
-	    p1Cnt--;
-	} else if ( p1Cnt == 2 ) {
-	    p1 = game.add.image(150, 260, 'blue');
-	    p1Cnt--;
-	} else if ( p1Cnt == 3 ) {
-	    p1 = game.add.image(150, 260, 'gre');
-	    p1Cnt--;
-	} else if ( p1Cnt == 4 ) {
-	    p1 = game.add.image(150, 260, 'yel');
-	    p1Cnt--;
-	} else if ( p1Cnt == 5 ) {
-	    p1 = game.add.image(150, 260, 'ora');
-	    p1Cnt--;
-	} else {
-	    p1 = game.add.image(150, 260, 'purp');
-	    p1Cnt = 5;
-	}
+    function chooseFerr(pointer) {
+	p1Cnt = 1;
     }
     
     return {
@@ -76,11 +40,10 @@ GameStates.makeMainMenu = function( game, shared ) {
             music.play();
 
     	    game.add.sprite(0, 0, 'bg');
-            p1 = game.add.image(150, 260, 'red');
+            lambopic = game.add.button(150, 200, 'lam', chooseLambo, null);
+	    ferrpic = game.add.button(450, 200, 'fer', chooseFerr, null);
     
             playButton = game.add.button( 303, 470, 'playButton', startGame, null, 'over', 'out', 'down');
-	    uparr = game.add.button(170, 200, 'up', colUp, null);
-	    dwnarr = game.add.button(170, 370, 'dwn', colDwn, null);
     
         },
     

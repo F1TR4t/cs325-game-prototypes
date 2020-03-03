@@ -4,12 +4,14 @@ GameStates.makeGame = function( game, shared ) {
     // Create your own variables.
     var bouncy = null;
     var road = null;
+    var cursor = null;
+    var music = null;
     
     function quitGame() {
 
         //  Here you should destroy anything you no longer need.
         //  Stop music, delete sprites, purge caches, free resources, all that good stuff.
-
+	music.stop();
         //  Then let's go back to the main menu.
         game.state.start('Result');
 
@@ -20,27 +22,36 @@ GameStates.makeGame = function( game, shared ) {
         create: function () {
     
             //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-            road = game.add.tileSprite(0, 0, 800, 600, 'road');
+            road = game.add.tileSprite(0, 0, 800, 2000, 'road');
+
+	    music = game.add.audio('bgmusic');
+	    music.play();
+	    
+	    game.world.setBounds(0, 0, 800, 2000);
             // Create a sprite at the center of the screen using the 'logo' image.
-            bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'car' );
-            // Anchor the sprite at its center, as opposed to its top-left corner.
+	    if ( p1Cnt == 0 ) {
+            	bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'lambo' );
+	    } else {
+		bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'ferr' );
+	    }
+	    // Anchor the sprite at its center, as opposed to its top-left corner.
             // so it will be truly centered.
             bouncy.anchor.setTo( 0.5, 0.5 );
+
+	    game.physics.startSystem(Phaser.Physics.P2JS);
             
             // Turn on the arcade physics engine for this sprite.
-            game.physics.enable( bouncy, Phaser.Physics.ARCADE );
+            game.physics.p2.enable(bouncy);
+
+	    cursor = game.input.keyboard.createCursorKeys();
             // Make it bounce off of the world bounds.
-            bouncy.body.collideWorldBounds = true;
             
             // Add some text using a CSS style.
             // Center it in X, and position its top 15 pixels from the top of the world.
-            var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-            var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
-            text.anchor.setTo( 0.5, 0.0 );
+            game.camera.follow(bouncy);
             
             // When you click on the sprite, you go back to the MainMenu.
             bouncy.inputEnabled = true;
-            bouncy.events.onInputDown.add( function() { quitGame(); }, this );
         },
     
         update: function () {
@@ -52,8 +63,15 @@ GameStates.makeGame = function( game, shared ) {
             // in X or Y.
             // This function returns the rotation angle that makes it visually match its
             // new trajectory.
-            bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
-	    road.tilePositionY -= 10;
+            bouncy.body.setZeroVelocity();
+
+	    if ( cursor.up.isDown ) {
+		bouncy.body.moveUp(300);
+	    }
+
+	    if ( cursor.down.isDown ) {
+		quitGame();
+	    }
         }
     };
 };
