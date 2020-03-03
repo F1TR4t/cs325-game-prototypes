@@ -30,18 +30,20 @@ GameStates.makeGame = function( game, shared ) {
 	    game.world.setBounds(0, 0, 800, 2000);
             // Create a sprite at the center of the screen using the 'logo' image.
 	    if ( p1Cnt == 0 ) {
-            	bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'lambo' );
+            	bouncy = game.add.sprite( game.world.centerX, 1800, 'lambo' );
 	    } else {
-		bouncy = game.add.sprite( game.world.centerX, game.world.centerY, 'ferr' );
+		bouncy = game.add.sprite( game.world.centerX, 2000, 'ferr' );
 	    }
 	    // Anchor the sprite at its center, as opposed to its top-left corner.
             // so it will be truly centered.
-            bouncy.anchor.setTo( 0.5, 0.5 );
+            bouncy.anchor.setTo( -0.15, -0.30 );
 
-	    game.physics.startSystem(Phaser.Physics.P2JS);
+	    game.physics.startSystem(Phaser.Physics.ARCADE);
             
             // Turn on the arcade physics engine for this sprite.
-            game.physics.p2.enable(bouncy);
+  	    game.physics.enable(bouncy, Phaser.Physics.ARCADE);
+	    bouncy.body.drag.set(100);
+    	    bouncy.body.maxVelocity.set(500);
 
 	    cursor = game.input.keyboard.createCursorKeys();
             // Make it bounce off of the world bounds.
@@ -63,11 +65,11 @@ GameStates.makeGame = function( game, shared ) {
             // in X or Y.
             // This function returns the rotation angle that makes it visually match its
             // new trajectory.
-            bouncy.body.setZeroVelocity();
-
-	    if ( cursor.up.isDown ) {
-		bouncy.body.moveUp(300);
-	    }
+            if (cursor.up.isDown) {
+		game.physics.arcade.accelerationFromRotation((3 * 3.141592653589793238462643383279502884197169399375105820974944592307816406286)/2, 900, bouncy.body.acceleration);
+   	    } else {
+        	bouncy.body.acceleration.set(0);
+  	    }
 
 	    if ( cursor.down.isDown ) {
 		quitGame();
