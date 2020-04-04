@@ -9,7 +9,7 @@ window.onload = function() {
     // Create Game States
     game.state.add( 'Boot', GameStates.makeBoot(game));
     game.state.add( 'Menu', GameStates.makeBoot(game));
-    game.state.add( 'Game', GameStates.makeBoot(game));
+   // game.state.add( 'Game', GameStates.makeBoot(game));
 
     // Start Boot
     game.state.start('Boot');

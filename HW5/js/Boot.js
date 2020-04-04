@@ -19,12 +19,18 @@ GameStates.makeBoot = function(game) {
 	     game.load.image('por', 'assets/porsche.png');
 
 	     // Load Backgrounds
+	     game.load.image('desBG', 'assets/BGP1.jpg');
 
 	     // Load Music
+
+	     // Load Misc
+	     game.load.image('cl1', 'assets/cl1.png');
+	     game.load.image('cl2', 'assets/cl2.png');
+	     game.load.image('cl3', 'assets/cl3.png');
 	},
 
 	create: function() {
 	     game.state.start('Menu');
 	}
-    }
-}
+    };
+};
