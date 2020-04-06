@@ -41,7 +41,8 @@ GameStates.makeBoot = function( game ) { // Potentially create global variables 
 			
 			
 			// Other Assets
-			
+			game.load.image('class', 'assets/classic.png');
+			game.load.image('play', 'assets/play.png');
     
         },
     

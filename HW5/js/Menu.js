@@ -1,10 +1,17 @@
 "use strict";
 
-var p1Cnt;
-
 GameStates.makeMenu = function( game, shared ) {
 	
-    var cl1 = null, cl2= null, cl3= null;
+    var cl1 = null, cl2 = null, cl3 = null;
+    var classButton = null, playButton = null;
+
+    function play(pointer) {
+	cl1.kill();
+	cl2.kill();
+	cl3.kill();
+
+	game.state.start('Game');
+    }
 
     return {
     
@@ -20,7 +27,7 @@ GameStates.makeMenu = function( game, shared ) {
 	    cl3 = game.add.sprite(550, 2, 'des_cl3');
     
             // Have Buttons Ready
-	    
+	    playButton = game.add.button(300, 300, 'play', play, null);
 			
         },
     
