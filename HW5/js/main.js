@@ -10,7 +10,7 @@ window.onload = function() {
 	
 	game.state.add( 'Boot', GameStates.makeBoot( game ) );
 	game.state.add( 'Menu', GameStates.makeMenu( game, shared ) );
-	game.state.add( 'Game', GameStates.makeGame( game, shared ) );
+	//game.state.add( 'Game', GameStates.makeGame( game, shared ) );
 
 	game.state.start('Boot'); // Start Boot Phase
 

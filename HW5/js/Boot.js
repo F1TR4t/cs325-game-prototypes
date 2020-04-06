@@ -18,9 +18,9 @@ GameStates.makeBoot = function( game ) { // Potentially create global variables 
     
             // Backgrounds
 			game.load.image('bg_des', 'assets/bg/des.jpg');
-			game.load.image('des_cl1', 'assets/bg/des_cl1');
-			game.load.image('des_cl2', 'assets/bg/des_cl2');
-			game.load.image('des_cl3', 'assets/bg/des_cl3');
+			game.load.image('des_cl1', 'assets/bg/des_cl1.png');
+			game.load.image('des_cl2', 'assets/bg/des_cl2.png');
+			game.load.image('des_cl3', 'assets/bg/des_cl3.png');
 			
 			// Maps
 			game.load.image('road_des', 'assets/maps/des.png');
