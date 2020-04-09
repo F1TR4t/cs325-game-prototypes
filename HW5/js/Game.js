@@ -7,6 +7,7 @@ GameStates.makeGame = function( game, shared ) {
     var road;
     var key1, key2;
     var music;
+    var p1Won = 0, p2Won = 0, p1Fin = 0, p2Fin = 0;
 
     // Player 1 Focused
     var currentSpeed1 = 0;
@@ -40,7 +41,6 @@ GameStates.makeGame = function( game, shared ) {
 	if ( lShift1 != null ) {
 	    lShift1.destroy();
 	}
-	car1.destroy();
 	key1.destroy();
 	game.time.events.remove(gtime1);
 	game.time.events.remove(ptime1);
@@ -58,15 +58,16 @@ GameStates.makeGame = function( game, shared ) {
 	if ( lShift2 != null ) {
 	    lShift2.destroy();
 	}
-	car2.destroy();
 	key2.destroy();
 	game.time.events.remove(gtime2);
 	game.time.events.remove(ptime2);
 	game.time.events.remove(ltime2);
 
+	music.stop();
+
 	road.destroy();
         // Go back to Menu State
-        game.state.start('Menu');
+	game.state.start('Menu');
 
     }
 
@@ -107,7 +108,7 @@ GameStates.makeGame = function( game, shared ) {
 	game.time.events.remove(ptime1);
 	game.time.events.remove(ltime1);
 	et1 = 1, gt1 = 0, pt1 = 0, lt1 = 0;
-	timeOff1 += 2;
+	timeOff1 += 0.5;
 	gtime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+1), disGoodP1, this);
 	ptime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+2), disPerfP1, this);
 	ltime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+4), disLateP1, this);
@@ -115,7 +116,7 @@ GameStates.makeGame = function( game, shared ) {
 
     function disGoodP2() {
 	et2 = 0;
-	gShift2 = game.add.sprite(280, 200, 'gs');
+	gShift2 = game.add.sprite(180, 200, 'gs');
 	gShift2.fixedToCamera = true;
 	gt2 = 1;
     }
@@ -123,7 +124,7 @@ GameStates.makeGame = function( game, shared ) {
     function disPerfP2() {
 	gt2 = 0;
 	gShift2.destroy();
-	pShift2 = game.add.sprite(280, 200, 'ps');
+	pShift2 = game.add.sprite(180, 200, 'ps');
 	pShift2.fixedToCamera = true;
 	pt2 = 1;
     }
@@ -131,7 +132,7 @@ GameStates.makeGame = function( game, shared ) {
     function disLateP2() {
 	pt2 = 0;
 	pShift2.destroy();
-	lShift2 = game.add.sprite(280,200,'ls');
+	lShift2 = game.add.sprite(180,200,'ls');
 	lShift2.fixedToCamera = true;
 	lt2 = 1;
     }
@@ -150,7 +151,7 @@ GameStates.makeGame = function( game, shared ) {
 	game.time.events.remove(ptime2);
 	game.time.events.remove(ltime2);
 	et2 = 1, gt2 = 0, pt2 = 0, lt2 = 0;
-	timeOff2 += 2;
+	timeOff2 += 0.5;
 	gtime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+1), disGoodP2, this);
 	ptime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+2), disPerfP2, this);
 	ltime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+4), disLateP2, this);
@@ -170,6 +171,8 @@ GameStates.makeGame = function( game, shared ) {
 	    ltime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+4), disLateP2, this);
 
 	    // Have Music Load
+	    music = game.add.audio('orgy');
+	    music.play();
 	    
    	    // Have Map Load
 	    road = game.add.tileSprite(0, 0, 800, 24000, 'road_des');
@@ -187,6 +190,7 @@ GameStates.makeGame = function( game, shared ) {
 
 	    // Enable physics for the cars and set up speeds
 	    game.physics.enable(car1, Phaser.Physics.ARCADE);
+	    game.physics.enable(car2, Phaser.Physics.ARCADE);
 
 	    // Create Controls
 	    key1 = game.input.keyboard;
@@ -240,12 +244,25 @@ GameStates.makeGame = function( game, shared ) {
 		currentSpeed2++;
 	   }
 	   
-	   game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(car2, 340, -5400), currentSpeed2, car2.body.velocity);
+	   game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(car2, 390, -5400), currentSpeed2, car2.body.velocity);
 
 	   if ( car2.body.y <= 0 ) {
-		quitGame();
+		p2Fin = 1;
+		car2.destroy();
+		if ( p1Fin == 0 ) {
+		    p2Won = 1;
+		}
+	   } else if ( car1.body.y <= 0 ) {
+		p1Fin = 1;
+		car1.destroy();
+		if ( p2Fin == 0 ) {
+		    p1Won = 1;
+		}
 	   }
 
+	   if ( (p1Fin == 1) && (p2Fin == 1) ) {
+		quitGame();
+	   }
 	}       
     };
 };

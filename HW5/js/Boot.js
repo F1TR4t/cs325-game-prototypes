@@ -38,11 +38,11 @@ GameStates.makeBoot = function( game ) { // Potentially create global variables 
 	    game.load.image('supra', 'assets/cars/supra.png');
 
 	    // OST
-
+	    game.load.audio('orgy', 'assets/OST/blue_monday-orgy.mp3');
 	    
 	    // Other Assets
 	    game.load.image('class', 'assets/classic.png');
-	    game.load.image('play', 'assets/play.png');
+	    game.load.atlas('play', 'assets/play.png', 'assets/play.json');
 	    game.load.image('ps', 'assets/ps.png');
 	    game.load.image('pst', 'assets/pstxt.png');
  	    game.load.image('gs', 'assets/gs.png');
