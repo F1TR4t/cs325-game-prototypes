@@ -161,28 +161,20 @@ GameStates.makeGame = function( game, shared ) {
     return {
     
         create: function () {
-	    // Have Assets Load
-	    gtime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+1), disGoodP1, this);
-	    ptime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+2), disPerfP1, this);
-	    ltime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+4), disLateP1, this);
-
-	    gtime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+1), disGoodP2, this);
-	    ptime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+2), disPerfP2, this);
-	    ltime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+4), disLateP2, this);
 
 	    // Have Music Load
 	    music = game.add.audio('orgy');
 	    music.play();
 	    
    	    // Have Map Load
-	    road = game.add.tileSprite(0, 0, 800, 24000, 'road_des');
+	    road = game.add.tileSprite(0, 0, 800, 18000, 'road_des');
 
-	    game.world.setBounds(0, 0, 800, 24000);
+	    game.world.setBounds(0, 0, 800, 18000);
 
 	    // Have Cars Load
-	    car1 = game.add.sprite(game.world.centerX, 23800, 'lambo');
+	    car1 = game.add.sprite(game.world.centerX, 17800, 'lambo');
 	    car1.anchor.setTo(0.05, -0.30);
-	    car2 = game.add.sprite(game.world.centerX, 23800, 'ferrari');
+	    car2 = game.add.sprite(game.world.centerX, 17800, 'ferrari');
 	    car2.anchor.setTo(1.15, -0.30);
 
 	    // Start Game Physics
@@ -198,6 +190,15 @@ GameStates.makeGame = function( game, shared ) {
 
 	    // Camera follow Car 1 for now
 	    game.camera.follow(car1);
+		
+		// Have Assets Load
+	    gtime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+1), disGoodP1, this);
+	    ptime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+2), disPerfP1, this);
+	    ltime1 = game.time.events.add(Phaser.Timer.SECOND*(timeOff1+4), disLateP1, this);
+
+	    gtime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+1), disGoodP2, this);
+	    ptime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+2), disPerfP2, this);
+	    ltime2 = game.time.events.add(Phaser.Timer.SECOND*(timeOff2+4), disLateP2, this);
 	    
         },
     

@@ -28,7 +28,7 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Drag Racing</h2>
+<h2>32-Bit Wheel Turner</h2>
 
 <ul>
 <li><strong>Originality:</strong>
@@ -36,31 +36,27 @@ The game takes a classic arcade gamemode from the Need for Speed franchise and f
 </li>
 
 <li><strong>Technical Merit:</strong>
-The use of arcade physics and having the camera follow the player's vehicle through the map.
+How timers are used to display a symbol on the screen and users can interact in order to increase their car's speed.
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
-That Phaser CE examples are a great place to get help and find out solutions to problems. The easiest part was finding assets and making the game look cool, the hard part was figuring out camera movement.
+That Phaser CE examples are a great place to get help and find out solutions to problems. The easiest part was finding assets and making the game look cool, the hard part was figuring out how to temporary display the symbols and getting input to work. Also, a bug occured where the map would disappear if I increased the height.
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Majority of my assets were taken from the internet and either had my touch sprinkled onto it, or just blended together.
 <ul>
-<li>Loading screen: Part of the template</li>
-<li>Button: Phaser example <a href="https://phaser.io/examples/v2/buttons/action-on-click">Action On Click</a></li>
+<li>Button: Custom Made</li>
 <li>Cars image: <a href="https://www.artstation.com/artwork/aeJ59">Car Images</a></li>
 <li>Road Image: <a href="https://www.pinterest.de/pin/413627547018117282/">Road Image</a></li>
-<li>Titlescreen Music: "Poppers and Prosecco" Kevin MacLeod (<a href="incompetech.com">incompetech.com</a>). Licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons: By Attribution 3.0 License</a></li>
-<li>Game Music: 0101 Created by yours truly <a href="https://soundcloud.com/dead-channel-465589873">My Sound Cloud</a></li>
-<li>Title and Results Screen background <a href="https://www.behance.net/gallery/6910307/Pixel-Desert">Picture Link</a></li>
+<li>Game Music: Orgy - Blue Monday (Downloaded from Youtube)</li>
+<li>Game Symbols: Based off Need for Speed Most Wanted, yet custom made</li>
+<li>Title Screen background <a href="https://www.behance.net/gallery/6910307/Pixel-Desert">Picture Link</a></li>
 </ul>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 The game got help from a phaser CE examples, but the gameplay is closest to the Need for Speed Franchise's Drag Racing gamemode, which primarily was in Need for Speed Underground til Need for Speed Most Wanted 2005.
-<ul>
-<li>Camera Movements example <a href="https://www.phaser.io/examples/v2/camera/basic-follow"></a></li>
-</ul>
 </li>
 
 <li><strong>High Concept:</strong>
@@ -68,7 +64,7 @@ A fast, timed racing game where you and your friend speed down the roadway, 1st 
 </li>
 
 <li><strong>Theme:</strong>
-Chickens because they're everywhere in the desert.
+None.
 </li>
 
 <li><strong>Mandated Variety:</strong>
@@ -76,7 +72,7 @@ I used keyboard input, used the racing game genre. There is no randomness, only 
 </li>
 
 <li><strong>Prototype Goal:</strong>
-The main game mechanic I wanted to test was "The Hot Potato" as I wanted the game to force players to not just continuously hold the accelerate button. But that was not implemented yet.
+The main game mechanic I focused on was shifting, where players have to time their shift whenever a symbol arrived. This would result in increasing their max velocity to a certain degree.
 </li>
 
 <li><strong>Player Experience Goals:</strong>
@@ -84,15 +80,15 @@ A fast, fun experience.
 </li>
 
 <li><strong>Gameplay:</strong>
-The player can drive the car forward by pressing W or the Up Arrow Key. I wanted to have a speedometer that showed whether the car was going to overheat when the player held their acceleration key for too long. I also wanted a minimap to show the distance and have the maps much longer.
+Player 1 and shift using the Up Arrow Key while player 2 can shift using the W key. Symbols will pop up in which the player can shift and gain a speed boost to go faster than their rivals.
 </li>
 
 <li><strong>Strategies:</strong>
-Timing and reflexes as the first player to accelerate first wins.
+Timing and reflexes as the player who shifts perfectly wins.
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
-Chickens enjoy watching drag racing, so you and your friends race to entertain them in order to save the world.
+The world is finite, with many places for a drag race. Why don't you and your buds take some cars out and go have fun.
 </li>
 
 <li><strong>Target Audience:</strong>
