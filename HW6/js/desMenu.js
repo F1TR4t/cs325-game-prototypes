@@ -7,6 +7,7 @@ GameStates.makeDesMenu = function( game, shared ) {
     function play(pointer) {
 	shared.music.stop();
 	
+	game.state.start('desRace');
     }
 
     return {
