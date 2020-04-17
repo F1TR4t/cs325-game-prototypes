@@ -1,26 +1,34 @@
-var boot = new Phaser.Class({
+"use strict";
 
-    Extends: Phaser.Scene,
-    initialize: function boot() { Phaser.Scene.class(this, {key: "boot"}); },
+var GameStates = {};
 
-    preload: function() {
+GameStates.makeBoot = function( game ) {
 
-	// Menu Backgrounds
-	this.load.image('bg_des', 'assets/bg/des/bg.png');
-	this.load.image('fg_des', 'assets/bg/des/fg.png');
+    return {
+	init: function() {
+	     game.input.maxPoitners = 2;
+	     game.stage.disableVisibilityChange = true;
+	     game.scale.pageAlignHorizontally = true;
+	},
 
-	// Menu Assets
-	this.load.image('play_button', 'assets/others/play_butt.png');
-	this.load.json('play_butt', 'assets/others/play_butt.json');
-	this.load.audio('menu', 'assets/ost/menu.mp3');
+	preload: function() {
+	     
+	     // Maps
+	     
 
-	
-    }
+	     // Menu Backgrounds
+	     game.load.image('bg_des', 'assets/bg/des/bg.png');
+	     game.load.image('fg_des', 'assets/bg/des/fg.png');
 
-    create: function() {
+	     // Menu Assets
+	     game.load.atlas('play_button', 'assets/other/play_butt.png', 'assets/other/play_butt.json');	     
 
-	this.scene.start('desMenu', 0);
-	this.sound.add('menu').play({loop: true});
-    }
+	     // Sound Tracks
+	     game.load.audio('menu1', 'assets/ost/menu.mp3');
+	},
 
-});
+	create: function() {
+	    game.state.start('desMenu'); 
+	}
+    };
+};
