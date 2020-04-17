@@ -21,14 +21,14 @@ GameStates.makeDesMenu = function( game, shared ) {
 	     fg = game.add.sprite(0, 0, 'fg_des');
 
 	     // Menu Assets
-	     playButton = game.add.button(300, 300, 'play_button', play, null, 'over', 'out', 'down');
+	     playButton = game.add.button(55, 500, 'play_button', play, null, 'over', 'out', 'down');
 	},
 
 	update: function() {
-	     if ( bg.centerX < -1600 ) {
-		bg.centerX = 0;
-	     }
-	     bg.centerX -= 20;
+	    if ( bg.x < -1600 ) {
+		bg.x = 0;
+	    }
+	    bg.x -= 1.5; 
 	}
     };
 };
