@@ -21,7 +21,7 @@ GameStates.makeDesMenu = function( game, shared ) {
 	     fg = game.add.sprite(0, 0, 'fg_des');
 
 	     // Menu Assets
-	     playButton = game.add.button(300, 300, 'play_button', play, null);
+	     playButton = game.add.button(300, 300, 'play_button', play, null, 'over', 'out', 'down');
 	},
 
 	update: function() {
