@@ -44,7 +44,7 @@
         {
          "columns":20,
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Desktop\/road.png",
+         "image":"road.png",
          "imageheight":200,
          "imagewidth":200,
          "margin":0,
@@ -57,7 +57,7 @@
         {
          "columns":20,
          "firstgid":401,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Desktop\/sand.png",
+         "image":"sand.png",
          "imageheight":200,
          "imagewidth":200,
          "margin":0,
@@ -70,7 +70,7 @@
         {
          "columns":20,
          "firstgid":801,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Desktop\/signs.png",
+         "image":"signs.png",
          "imageheight":200,
          "imagewidth":200,
          "margin":0,
@@ -83,7 +83,7 @@
         {
          "columns":80,
          "firstgid":1201,
-         "image":"..\/..\/..\/..\/..\/..\/..\/Desktop\/destown.png",
+         "image":"destown.png",
          "imageheight":1176,
          "imagewidth":800,
          "margin":0,
