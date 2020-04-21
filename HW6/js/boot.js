@@ -13,12 +13,11 @@ GameStates.makeBoot = function( game ) {
 
 	preload: function() {
 	     
+	     // Cars
+	     game.load.image('lambo', 'assets/cars/lamborghini.png');
+
 	     // Maps
-	     game.load.tilemap('des', 'assets/maps/des/des.json', null, Phaser.Tilemap.TILED_JSON);
-	     game.load.image('tiles1', 'assets/maps/des/road.png', 10, 10);
-	     game.load.image('tiles2', 'assets/maps/des/sand.png', 10, 10);
-	     game.load.image('tiles3', 'assets/maps/des/signs.png', 10, 10);
-	     game.load.image('tiles4', 'assets/maps/des/destown.png', 10, 10);
+	     game.load.image('des', 'assets/maps/desert.png');
 
 	     // Menu Backgrounds
 	     game.load.image('bg_des', 'assets/bg/des/bg.png');
