@@ -16,6 +16,11 @@ GameStates.makeBoot = function( game ) {
 	     // Cars
 	     game.load.image('lambo', 'assets/cars/lamborghini.png');
 
+	     // Gameplay Assets
+	     game.load.image('ps', 'assets/other/ps.png');
+	     game.load.image('gs', 'assets/other/gs.png');
+	     game.load.image('ls', 'assets/other/ls.png');
+
 	     // Maps
 	     game.load.image('des', 'assets/maps/desert.png');
 
@@ -28,6 +33,7 @@ GameStates.makeBoot = function( game ) {
 
 	     // Sound Tracks
 	     game.load.audio('menu1', 'assets/ost/menu.mp3');
+
 	},
 
 	create: function() {
