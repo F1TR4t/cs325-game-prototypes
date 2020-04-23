@@ -18,7 +18,7 @@ GameStates.makeDesRace = function( game, shared ) {
     var looper, shift;
 
     // Numerical Variables
-    var loop = 4000, tOff, spOff, gear;
+    var loop, tOff, spOff, gear;
 
     // Gameplay Assets
     var ps, gs, ls;
@@ -132,36 +132,16 @@ GameStates.makeDesRace = function( game, shared ) {
 		shared.music = game.add.audio('track12');
 		break;
 	}
+	shared.music.play();
     }
 
     function quitGame() {
 	// Destroy more stuff
 	map.destroy();
-	music.stop();
+	shared.music.stop();
 	carP.destroy();
 
 	game.state.start('desMenu');
-    }
-
-    // Displays results of the game.
-    function results() {
-	if ( gs != null ) {
-	     gs.destroy();
-	}
-
-	if ( ps != null ) {
-	     ps.destroy();
-	}
-
-	if ( ls != null ) {
-	     ls.destroy();
-	}
-
-	// Creates results screen for who won
-	results = game.add.image(0, -10, 'result');
-	var style = { font: "48px Courier", fill: "#fff", tabs: 132, boundsAlignV: "middle" };
-	res = game.add.text(450, 75, "You Won\n\n\n\n\nPress Enter", style);
-	res.anchor.x = 0.5;	
     }
 
     return {
@@ -171,10 +151,10 @@ GameStates.makeDesRace = function( game, shared ) {
 	     esh = true, gsh = false, psh = false, lsh = false;
 	     tOff = 0.25, spOff = 1, gear = 1;
 	     esc = 0, gsc = 0, psc = 0, lsc = 0;
+	     loop = 4000;
 
 	     // Music Plays
 	     pickMusic();
-	     shared.music.play();
 
 	     // Creating map
 	     map = game.add.tileSprite(0, 0, 800, 8000, 'des');
@@ -197,21 +177,17 @@ GameStates.makeDesRace = function( game, shared ) {
 	},
 
 	update: function() {
+		loopMap();
 
-	     loopMap();
+	     	carP.body.y -= spOff;
 
-	     carP.body.y -= spOff;
+	     	if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
+			 reset();
+	     	}
 
-	     if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
-		 reset();
-	     }
-
-	     if ( carP.body.y <= -10 ) {
-		results();
-		if ( key.isDown(Phaser.KeyCode.ENTER) ) {
-	     	    quitGame();
-		}
-	     }
+	     	if ( carP.body.y <= -10 ) {
+			quitGame();
+	    	}
 	}
     };
 };
