@@ -12,8 +12,7 @@ GameStates.makeDesRace = function( game, shared ) {
     var looper, shift;
 
     // Numerical Variables
-    var loop = 4000, tOff = 0.25;
-    var spOff = 1;
+    var loop = 4000, tOff, spOff, gear;
 
     // Gameplay Assets
     var ps, gs, ls;
@@ -21,45 +20,54 @@ GameStates.makeDesRace = function( game, shared ) {
 
     // Creates the shift icons (Create the separate methods)
     function displayShifts() {
-	if ((esh==true) && (gsh==false)) {
+	if ((esh==true) && (gsh==false) && (psh==false) && (lsh==false) ) {
 	    esh = false;
 	    gs = game.add.sprite(580, 200, 'gs');
 	    gs.fixedToCamera = true;
 	    gsh = true;
-	} else if ( (gsh==true) && (psh==false)) {
+	    tOff = 0.7 * (gear - 1);
+	    shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.3), displayShifts, this);
+	} else if ((esh==false) && (gsh==true) && (psh==false) && (lsh==false)) {
 	    gsh = false;
 	    gs.destroy();
 	    ps = game.add.sprite(580, 200, 'ps');
 	    ps.fixedToCamera = true;
 	    psh = true;
-	} else if ( (psh==true) && (lsh==false)) {
+	    tOff = 0.4 * (gear - 1);
+	    shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.05), displayShifts, this);
+	} else if ((esh==false) && (gsh==false) && (psh==true) && (lsh==false) ) {
 	    psh = false;
 	    ps.destroy();
 	    ls = game.add.sprite(580, 200, 'ls');
 	    ls.fixedToCamera = true;
 	    lsh = true;
-	} else {
-	    ls.destroy();
-	    lsh = false;
-	    esh = true;
 	}
     }
 
     function reset() {
-	if ( gs != null ) {
+	if ( (gs == null) && (ps == null) && (ls == null) ) {
+	    spoOff += 0.0002;
+	}
+
+	if ( gs != null ) { // Good Shift
 	    gs.destroy();
+	    spOff += 0.25;
 	}
 
-	if ( ps != null ) {
+	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
+	    spOff += 0.5;
 	}
 
-	if ( ls != null ) {
+	if ( ls != null ) { // Late Shift
 	    ls.destroy();
+	    spOff += 0.0001;
 	}
 
+	tOff = 1.7 + (2 * (gear - 1));
+	gear++;
 	esh = true, psh = false, gsh = false, lsh = false;
-	shift = game.time.events.add(Phaser.Timer.SECOND*tOff, displayShifts, this);
+	shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.2), displayShifts, this);
     }
 
     // Forces map to loop at a certain point to
@@ -79,17 +87,32 @@ GameStates.makeDesRace = function( game, shared ) {
 
     // Displays results of the game.
     function results() {
+	// Destroy stuff
+	carP.destroy();
+
+	if ( gs != null ) {
+	     gs.destroy();
+	}
+
+	if ( ps != null ) {
+	     ps.destroy();
+	}
+
+	if ( ls != null ) {
+	     ls.destroy();
+	}
+
 	// Creates results screen for who won
 	
-	
-	quitGame();
+	if ( key.isDown(Phaser.KeyCode.ENTER) ) {
+	     quitGame();
+	}
     }
 
     function quitGame() {
-	// Destroy stuff
+	// Destroy more stuff
 	map.destroy();
 	carP.destroy();
-	key.destroy();
 
 	game.state.start('desMenu');
     }
@@ -99,6 +122,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	create: function() {
 	     // Set Up Gameplay
 	     esh = true, gsh = false, psh = false, lsh = false;
+	     tOff = 0.25, spOff = 1, gear = 1;
 
 	     // Music Plays
 	     
@@ -119,8 +143,8 @@ GameStates.makeDesRace = function( game, shared ) {
 	     key = game.input.keyboard;
 
 	     // Timers
-	     looper = game.time.events.add(Phaser.Timer.SECOND*45, turnOffLoop, this);
-	     shift = game.time.events.add(Phaser.Timer.SECOND*tOff, displayShifts, this);
+	     looper = game.time.events.add(Phaser.Timer.SECOND*30, turnOffLoop, this);
+	     shift = game.time.events.add(Phaser.Timer.SECOND*0.2, displayShifts, this);
 	},
 
 	update: function() {
@@ -129,13 +153,7 @@ GameStates.makeDesRace = function( game, shared ) {
 
 	     carP.body.y -= spOff;
 
-	     if ( esh && !gsh && !psh && !lsh && key.isDown(Phaser.KeyCode.SHIFT) ) {
-		     reset();
-	     } else if ( !esh && gsh && !psh && !lsh && key.isDown(Phaser.KeyCode.SHIFT) ) {
-		     reset();
-	     } else if ( !esh && !gsh && psh && !lsh && key.isDown(Phaser.KeyCode.SHIFT) ) {
-		     reset();
-	     } else if ( !esh && !gsh && !psh && lsh && key.isDown(Phaser.KeyCode.SHIFT) ) {
+	     if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
 		     reset();
 	     }
 
