@@ -3,7 +3,13 @@
 GameStates.makeDesRace = function( game, shared ) {
 
     // General Game Assets
-    var map;
+    var map, results;
+
+    // Text Assets
+    var res, eS, gS, pS, lS;
+
+    // Counters
+    var esc, gsc, psc, lsc;
 
     // Player Assets
     var carP, key;
@@ -43,7 +49,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	    lsh = true;
 	}
     }
-
+       
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
 	    spoOff += 0.0002;
@@ -85,6 +91,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	loop = 0;
     }
 
+
     // Displays results of the game.
     function results() {
 	// Destroy stuff
@@ -103,7 +110,11 @@ GameStates.makeDesRace = function( game, shared ) {
 	}
 
 	// Creates results screen for who won
-	
+	results = game.add.image(0, -10, 'result');
+	var style = { font: "64px Courier", fill: "#fff", tabs: 132, boundsAlignV: "middle" };
+	res = game.add.text(215, 25, "You Won\n\n\n\n\nPress Enter", style);
+	res.anchor.x = 0.5;
+
 	if ( key.isDown(Phaser.KeyCode.ENTER) ) {
 	     quitGame();
 	}
@@ -113,8 +124,52 @@ GameStates.makeDesRace = function( game, shared ) {
 	// Destroy more stuff
 	map.destroy();
 	carP.destroy();
+	music.stop();
 
 	game.state.start('desMenu');
+    }
+
+    function pickMusic() {
+	var no = Math.floor(Math.random()*12);
+
+	switch(no) {
+	     case 0:
+		shared.music = game.add.audio('track1');
+		break;
+	    case 1:
+		shared.music = game.add.audio('track2');
+		break;
+	    case 2:
+		shared.music = game.add.audio('track3');
+		break;
+	    case 3:
+		shared.music = game.add.audio('track4');
+		break;
+	    case 4:
+		shared.music = game.add.audio('track5');
+		break;
+	    case 5:
+		shared.music = game.add.audio('track6');
+		break;
+	    case 6:
+		shared.music = game.add.audio('track7');
+		break;
+	    case 7:
+		shared.music = game.add.audio('track8');
+		break;
+	    case 8:
+		shared.music = game.add.audio('track9');
+		break;
+	    case 9:
+		shared.music = game.add.audio('track10');
+		break;
+	    case 10:
+		shared.music = game.add.audio('track11');
+		break;
+	    case 11:
+		shared.music = game.add.audio('track12');
+		break;
+	}
     }
 
     return {
@@ -123,9 +178,11 @@ GameStates.makeDesRace = function( game, shared ) {
 	     // Set Up Gameplay
 	     esh = true, gsh = false, psh = false, lsh = false;
 	     tOff = 0.25, spOff = 1, gear = 1;
+	     esc = 0, gsc = 0, psc = 0, lsc = 0;
 
 	     // Music Plays
-	     
+	     pickMusic();
+	     shared.music.play();
 
 	     // Creating map
 	     map = game.add.tileSprite(0, 0, 800, 8000, 'des');
