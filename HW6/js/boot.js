@@ -14,7 +14,16 @@ GameStates.makeBoot = function( game ) {
 	preload: function() {
 	     
 	     // Cars
+	     game.load.image('aston', 'assets/cars/aston.png');
+	     game.load.image('audi', 'assets/cars/audi.png');
+	     game.load.image('bugat', 'assets/cars/bugatti.png');
+	     game.load.image('corve', 'assets/cars/corvette.png');
+	     game.load.image('dodge', 'assets/cars/dodge.png');
+	     game.load.image('ferra', 'assets/cars/ferrari.png');
 	     game.load.image('lambo', 'assets/cars/lamborghini.png');
+	     game.load.image('merce', 'assets/cars/mercedes.png');
+	     game.load.image('porsc', 'assets/cars/porsche.png');
+	     game.load.image('supra', 'assets/cars/supra.png');
 
 	     // Gameplay Assets
 	     game.load.image('ps', 'assets/other/ps.png');

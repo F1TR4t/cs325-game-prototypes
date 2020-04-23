@@ -3,13 +3,7 @@
 GameStates.makeDesRace = function( game, shared ) {
 
     // General Game Assets
-    var map, results;
-
-    // Text Assets
-    var res, eS, gS, pS, lS;
-
-    // Counters
-    var esc, gsc, psc, lsc;
+    var map, carAI, spOffAI;
 
     // Player Assets
     var carP, key;
@@ -53,21 +47,25 @@ GameStates.makeDesRace = function( game, shared ) {
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
 	    spoOff += 0.0002;
+	    spOffAI += 0.1;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
 	    spOff += 0.25;
+	    spOffAI += 20;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
 	    spOff += 0.5;
+	    spOffAI += 0.45;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
 	    spOff += 0.0001;
+	    spOffAI += 0.1;
 	}
 
 	tOff = 1.7 + (2 * (gear - 1));
@@ -81,7 +79,9 @@ GameStates.makeDesRace = function( game, shared ) {
     function loopMap() {
 	if ( loop == 4000 ) {
 	     if ( carP.body.y <= loop ) {
+		var diff = carP.body.y - carAI.body.y;
 		carP.body.y = 7400;
+		carAI.body.y = 7400 - diff;
 	     }
 	}
     } 
@@ -135,11 +135,49 @@ GameStates.makeDesRace = function( game, shared ) {
 	shared.music.play();
     }
 
+    function pickAICar() {
+	var no = Math.floor(Math.random()*12);
+
+	switch(no) {
+	     case 0:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'merce');
+		break;
+	    case 1:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'aston');
+		break;
+	    case 2:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'audi');
+		break;
+	    case 3:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'bugat');
+		break;
+	    case 4:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'corve');
+		break;
+	    case 5:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'dodge');
+		break;
+	    case 6:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'ferra');
+		break;
+	    case 7:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'lambo');
+		break;
+	    case 8:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'porsc');
+		break;
+	    case 9:
+		carAI = game.add.sprite(game.world.centerX-95, 7900, 'supra');
+		break;
+	}
+    }
+
     function quitGame() {
 	// Destroy more stuff
 	map.destroy();
 	shared.music.stop();
 	carP.destroy();
+	carAI.destroy();
 
 	game.state.start('desMenu');
     }
@@ -150,7 +188,6 @@ GameStates.makeDesRace = function( game, shared ) {
 	     // Set Up Gameplay
 	     esh = true, gsh = false, psh = false, lsh = false;
 	     tOff = 0.25, spOff = 1, gear = 1;
-	     esc = 0, gsc = 0, psc = 0, lsc = 0;
 	     loop = 4000;
 
 	     // Music Plays
@@ -164,8 +201,10 @@ GameStates.makeDesRace = function( game, shared ) {
 	     game.physics.startSystem(Phaser.Physics.ARCADE);
 
 	     // Create Cars
+	     pickAICar();
 	     carP = game.add.sprite(game.world.centerX-5, 7900, 'lambo');
 	     game.physics.enable(carP, Phaser.Physics.ARCADE);
+	     game.physics.enable(carAI, Phaser.Physics.ARCADE);
 	     game.camera.follow(carP);
 
 	     // Key Made
@@ -180,6 +219,7 @@ GameStates.makeDesRace = function( game, shared ) {
 		loopMap();
 
 	     	carP.body.y -= spOff;
+		carAI.body.y -= spOff
 
 	     	if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
 			 reset();
