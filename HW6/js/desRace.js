@@ -91,44 +91,6 @@ GameStates.makeDesRace = function( game, shared ) {
 	loop = 0;
     }
 
-
-    // Displays results of the game.
-    function results() {
-	// Destroy stuff
-	carP.destroy();
-
-	if ( gs != null ) {
-	     gs.destroy();
-	}
-
-	if ( ps != null ) {
-	     ps.destroy();
-	}
-
-	if ( ls != null ) {
-	     ls.destroy();
-	}
-
-	// Creates results screen for who won
-	results = game.add.image(0, -10, 'result');
-	var style = { font: "64px Courier", fill: "#fff", tabs: 132, boundsAlignV: "middle" };
-	res = game.add.text(215, 25, "You Won\n\n\n\n\nPress Enter", style);
-	res.anchor.x = 0.5;
-
-	if ( key.isDown(Phaser.KeyCode.ENTER) ) {
-	     quitGame();
-	}
-    }
-
-    function quitGame() {
-	// Destroy more stuff
-	map.destroy();
-	carP.destroy();
-	music.stop();
-
-	game.state.start('desMenu');
-    }
-
     function pickMusic() {
 	var no = Math.floor(Math.random()*12);
 
@@ -172,6 +134,36 @@ GameStates.makeDesRace = function( game, shared ) {
 	}
     }
 
+    function quitGame() {
+	// Destroy more stuff
+	map.destroy();
+	music.stop();
+	carP.destroy();
+
+	game.state.start('desMenu');
+    }
+
+    // Displays results of the game.
+    function results() {
+	if ( gs != null ) {
+	     gs.destroy();
+	}
+
+	if ( ps != null ) {
+	     ps.destroy();
+	}
+
+	if ( ls != null ) {
+	     ls.destroy();
+	}
+
+	// Creates results screen for who won
+	results = game.add.image(0, -10, 'result');
+	var style = { font: "48px Courier", fill: "#fff", tabs: 132, boundsAlignV: "middle" };
+	res = game.add.text(450, 75, "You Won\n\n\n\n\nPress Enter", style);
+	res.anchor.x = 0.5;	
+    }
+
     return {
 	
 	create: function() {
@@ -211,11 +203,14 @@ GameStates.makeDesRace = function( game, shared ) {
 	     carP.body.y -= spOff;
 
 	     if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
-		     reset();
+		 reset();
 	     }
 
 	     if ( carP.body.y <= -10 ) {
 		results();
+		if ( key.isDown(Phaser.KeyCode.ENTER) ) {
+	     	    quitGame();
+		}
 	     }
 	}
     };
