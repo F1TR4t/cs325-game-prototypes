@@ -20,6 +20,10 @@ GameStates.makeDesRace = function( game, shared ) {
 	
 	// Security Checks
 	var resLock, quitLock;
+	
+	function decLock() {
+		resLock = 0;
+	}
 
     // Creates the shift icons (Create the separate methods)
     function displayShifts() {
@@ -75,6 +79,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	gear++;
 	esh = true, psh = false, gsh = false, lsh = false;
 	shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.2), displayShifts, this);
+	game.time.events.add(Phaser.Timer.SECOND*(tOff+0.2), decLock, this);
     }
 
     // Forces map to loop at a certain point to
