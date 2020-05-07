@@ -66,7 +66,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
 	    spOff += 150;
-	    spOffAI += 2;
+	    spOffAI += 1;
 	}
 
 	if ( ls != null ) { // Late Shift
@@ -88,7 +88,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	if ( loop == 4000 ) {
 	     if ( carP.body.y <= loop ) {
 			carP.body.y = 7400;
-			carAI.body.y = 7400;
+			carAI.body.y = 8000;
 	     }
 	}
     } 

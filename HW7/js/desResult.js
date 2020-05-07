@@ -24,9 +24,9 @@ GameStates.makeDesResult = function( game, shared ) {
 			
 			var style = { font: "30px Verdana", fill: "#ffffff", align: "center" };
 			if ( shared.won == 1 ) {
-				resTxt = game.add.text( game.world.centerX, game.world.centerY, "You Won\n\n\n\n\nPress Shift to Continue", style );
+				resTxt = game.add.text( game.world.centerX, 400, "You Won\n\n\n\n\nPress Shift to Continue", style );
 			} else { 
-				resTxt = game.add.text( game.world.centerX, game.world.centerY, "You Lost\n\n\n\n\nPress Shift to Continue", style );
+				resTxt = game.add.text( game.world.centerX, 400, "You Lost\n\n\n\n\nPress Shift to Continue", style );
 			}
 		},
 		
