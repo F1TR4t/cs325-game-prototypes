@@ -3,8 +3,8 @@
 window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.Auto, 'game' );
 
-    var music = null;
-    var shared = { music };
+    var music = null, won = 0, lost = 0;
+    var shared = { music, won, lost };
 
     game.state.add( 'boot', GameStates.makeBoot( game ) );
     game.state.add( 'desMenu', GameStates.makeDesMenu( game, shared ) );

@@ -3,6 +3,8 @@
 GameStates.makeDesResult = function( game, shared ) {
 
 	var key, map, lock, result;
+	
+	var resTxt;
 
 	function toMenu() {
 		shared.music.stop();
@@ -17,8 +19,15 @@ GameStates.makeDesResult = function( game, shared ) {
 		create: function() {
 			key = game.input.keyboard;
 			map = game.add.tileSprite(0, 0, 800, 8000, 'des');
-			result = game.add.image(0, 0, 'result');
+			result = game.add.image(0, -5, 'result');
 			lock = 0;
+			
+			var style = { font: "30px Verdana", fill: "#ffffff", align: "center" };
+			if ( shared.won == 1 ) {
+				resTxt = game.add.text( game.world.centerX, game.world.centerY, "You Won\n\n\n\n\nPress Shift to Continue", style );
+			} else { 
+				resTxt = game.add.text( game.world.centerX, game.world.centerY, "You Lost\n\n\n\n\nPress Shift to Continue", style );
+			}
 		},
 		
 		update: function() {

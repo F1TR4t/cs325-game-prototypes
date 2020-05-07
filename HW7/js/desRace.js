@@ -54,25 +54,25 @@ GameStates.makeDesRace = function( game, shared ) {
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
 	    spoOff += 50;
-	    spOffAI += 4;
+	    spOffAI += 2;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
 	    spOff += 100;
-	    spOffAI += 2;
+	    spOffAI += 1;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
 	    spOff += 150;
-	    spOffAI += 6;
+	    spOffAI += 2;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
 	    spOff += 50;
-	    spOffAI += 4;
+	    spOffAI += 2;
 	}
 
 	tOff = 1.7 + (2 * (gear - 1));
@@ -223,6 +223,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	     // Timers
 	     looper = game.time.events.add(Phaser.Timer.SECOND*30, turnOffLoop, this);
 	     shift = game.time.events.add(Phaser.Timer.SECOND*0.2, displayShifts, this);
+		 shared.won = 0, shared.lost = 0;
 	},
 
 	update: function() {
@@ -235,9 +236,16 @@ GameStates.makeDesRace = function( game, shared ) {
 			resLock = 1;
 			reset();
 	    }
+		
+		if ( carAI.body.y <= 10 ) {
+			shared.lost = 1;
+		}
 
 	    if ( (quitLock == 0 ) && carP.body.y <= 10) {
 			quitLock = 1;
+			if ( shared.lost == 0 ) {
+				shared.won = 1;
+			}
 			quitGame();
 	    }
 	}
