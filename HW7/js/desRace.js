@@ -229,8 +229,8 @@ GameStates.makeDesRace = function( game, shared ) {
 	update: function() {
 		loopMap();
 
-	    carP.body.y -= spOff;
-		carAI.body.y -= spOff
+	    game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carP, game.world.centerX-5, 0), spOff, carP.body.velocity);
+		game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carAI, game.world.centerX-95, 0), spOffAI, carAI.body.velocity);
 
 	    if ( (resLock == 0 ) && key.isDown(Phaser.KeyCode.SHIFT) ) {
 			resLock = 1;
