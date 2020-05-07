@@ -190,7 +190,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	carP.destroy();
 	carAI.destroy();
 
-	game.state.start('desMenu');
+	game.state.start('desResult');
     }
 
     return {
@@ -198,7 +198,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	create: function() {
 	     // Set Up Gameplay
 	     esh = true, gsh = false, psh = false, lsh = false;
-	     tOff = 0.25, spOff = 1, gear = 1;
+	     tOff = 0.25, spOff = 10, gear = 1, spOffAI = 1;
 	     loop = 4000;
 
 	     // Music Plays
