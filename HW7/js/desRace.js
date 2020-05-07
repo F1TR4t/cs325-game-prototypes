@@ -216,7 +216,7 @@ GameStates.makeDesRace = function( game, shared ) {
 	     game.camera.follow(carP);
 		 
 		 carP.body.velocity = -1;
-		 varAI.body.velocity = -1;
+		 carAI.body.velocity = -1;
 
 	     // Key Made
 	     key = game.input.keyboard;
