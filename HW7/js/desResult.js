@@ -28,6 +28,7 @@ GameStates.makeDesResult = function( game, shared ) {
 			} else { 
 				resTxt = game.add.text( game.world.centerX, 400, "You Lost\n\n\n\n\nPress Shift to Continue", style );
 			}
+			resTxt.anchor.setTo( 0.5, 0.5 );
 		},
 		
 		update: function() {
