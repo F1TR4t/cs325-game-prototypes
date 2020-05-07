@@ -17,6 +17,9 @@ GameStates.makeDesRace = function( game, shared ) {
     // Gameplay Assets
     var ps, gs, ls;
     var esh, psh, gsh, lsh;
+	
+	// Security Checks
+	var resLock, quitLock;
 
     // Creates the shift icons (Create the separate methods)
     function displayShifts() {
@@ -209,6 +212,9 @@ GameStates.makeDesRace = function( game, shared ) {
 
 	     // Key Made
 	     key = game.input.keyboard;
+		 
+		 // Security
+		 resLock = 0, quitLock = 0;
 
 	     // Timers
 	     looper = game.time.events.add(Phaser.Timer.SECOND*30, turnOffLoop, this);
@@ -218,16 +224,18 @@ GameStates.makeDesRace = function( game, shared ) {
 	update: function() {
 		loopMap();
 
-	     	carP.body.y -= spOff;
+	    carP.body.y -= spOff;
 		carAI.body.y -= spOff
 
-	     	if ( key.isDown(Phaser.KeyCode.SHIFT) ) {
-			 reset();
-	     	}
+	    if ( (resLock == 0 ) && key.isDown(Phaser.KeyCode.SHIFT) ) {
+			resLock = 1;
+			reset();
+	    }
 
-	     	if ( carP.body.y <= -10 ) {
+	    if ( (quitLock == 0 ) && carP.body.y <= -10 ) {
+			quitLock = 1;
 			quitGame();
-	    	}
+	    }
 	}
-    };
+  };
 };
