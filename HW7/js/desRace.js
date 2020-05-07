@@ -53,26 +53,26 @@ GameStates.makeDesRace = function( game, shared ) {
        
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
-	    spoOff += 10;
-	    spOffAI += 5;
+	    spoOff += 30;
+	    spOffAI += 1;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
-	    spOff += 30;
-	    spOffAI += 2;
+	    spOff += 50;
+	    spOffAI += 1;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
-	    spOff += 50;
-	    spOffAI += 3;
+	    spOff += 100;
+	    spOffAI += 1;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
-	    spOff += 10;
-	    spOffAI += 5;
+	    spOff += 30;
+	    spOffAI += 2;
 	}
 
 	tOff = 1.7 + (2 * (gear - 1));
