@@ -80,8 +80,6 @@ GameStates.makeDesRace = function( game, shared ) {
 	esh = true, psh = false, gsh = false, lsh = false;
 	shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.2), displayShifts, this);
 	game.time.events.add(Phaser.Timer.SECOND, decLock, this);
-	game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carP, game.world.centerX-5, 0), spOff, carP.body.velocity);
-	game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carAI, game.world.centerX-95, 0), spOffAI, carAI.body.velocity);
     }
 
     // Forces map to loop at a certain point to
@@ -229,13 +227,13 @@ GameStates.makeDesRace = function( game, shared ) {
 	     // Timers
 	     looper = game.time.events.add(Phaser.Timer.SECOND*30, turnOffLoop, this);
 	     shift = game.time.events.add(Phaser.Timer.SECOND*0.2, displayShifts, this);
-		 
-		game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carP, game.world.centerX-5, 0), spOff, carP.body.velocity);
-		game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carAI, game.world.centerX-95, 0), spOffAI, carAI.body.velocity);
 	},
 
 	update: function() {
 		loopMap();
+
+	    game.physics.arcade.velocityFromRotation(game.physics.arcade.angleToXY(carP, game.world.centerX-5, 0), spOff, carP.body.velocity);
+		carAI.body.y -= spOffAI;
 
 	    if ( (resLock == 0 ) && key.isDown(Phaser.KeyCode.SHIFT) ) {
 			resLock = 1;
