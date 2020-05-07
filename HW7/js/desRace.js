@@ -87,9 +87,12 @@ GameStates.makeDesRace = function( game, shared ) {
     function loopMap() {
 	if ( loop == 4000 ) {
 	     if ( carP.body.y <= loop ) {
-		var diff = carP.body.y - carAI.body.y;
-		carP.body.y = 7400;
-		carAI.body.y = 7400 - diff;
+			var diff = carP.body.y - carAI.body.y;
+			if ( diff < 0 ) {
+				diff *= -1;
+			}
+			carP.body.y = 7400;
+			carAI.body.y = 7400 - diff;
 	     }
 	}
     } 
@@ -237,7 +240,7 @@ GameStates.makeDesRace = function( game, shared ) {
 			reset();
 	    }
 
-	    if ( (quitLock == 0 ) && carP.body.y <= -10 ) {
+	    if ( (quitLock == 0 ) && carP.body.y <= 10) {
 			quitLock = 1;
 			quitGame();
 	    }
