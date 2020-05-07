@@ -53,25 +53,25 @@ GameStates.makeDesRace = function( game, shared ) {
        
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
-	    spoOff += 30;
-	    spOffAI += 1;
+	    spoOff += 50;
+	    spOffAI += 2;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
-	    spOff += 50;
-	    spOffAI += 0.25;
+	    spOff += 100;
+	    spOffAI += 1;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
-	    spOff += 100;
-	    spOffAI += 0.5;
+	    spOff += 150;
+	    spOffAI += 1;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
-	    spOff += 30;
+	    spOff += 50;
 	    spOffAI += 2;
 	}
 
@@ -87,12 +87,8 @@ GameStates.makeDesRace = function( game, shared ) {
     function loopMap() {
 	if ( loop == 4000 ) {
 	     if ( carP.body.y <= loop ) {
-			var diff = carP.body.y - carAI.body.y;
-			if ( diff < 0 ) {
-				diff *= -1;
-			}
 			carP.body.y = 7400;
-			carAI.body.y = 7400 - diff;
+			carAI.body.y = 7400;
 	     }
 	}
     } 
