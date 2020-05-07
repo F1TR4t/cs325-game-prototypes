@@ -20,7 +20,7 @@ GameStates.makeDesResult = function( game, shared ) {
 		},
 		
 		update: function() {
-			if ( (lock == 0) && key.isDown(Phaser.KeyCode.SPACE) ) {
+			if ( (lock == 0) && key.isDown(Phaser.KeyCode.SHIFT) ) {
 				lock = 1;
 				toMenu();
 			}
