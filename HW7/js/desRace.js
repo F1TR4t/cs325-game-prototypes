@@ -60,13 +60,13 @@ GameStates.makeDesRace = function( game, shared ) {
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
 	    spOff += 30;
-	    spOffAI -= 20;
+	    spOffAI += 5;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
 	    spOff += 50;
-	    spOffAI -= 20;
+	    spOffAI += 10;
 	}
 
 	if ( ls != null ) { // Late Shift
