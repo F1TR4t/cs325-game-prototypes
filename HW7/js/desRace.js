@@ -53,26 +53,26 @@ GameStates.makeDesRace = function( game, shared ) {
        
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
-	    carP.body.velocity *= 2;
-	    carAI.body.velocity *= 10;
+	    spoOff += 5;
+	    spOffAI += 25;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
-	    carP.body.velocity *= 5;
-	    carAI.body.velocity *= 0.5;
+	    spOff += 30;
+	    spOffAI -= 20;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
-	    carP.body.velocity *= 10;
-	    carAI.body.velocity *= 0.25;
+	    spOff += 50;
+	    spOffAI -= 20;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
-	    carP.body.velocity *= 2;
-	    carAI.body.velocity *= 10;
+	    spOff += 5;
+	    spOffAI += 20;
 	}
 
 	tOff = 1.7 + (2 * (gear - 1));
@@ -214,9 +214,6 @@ GameStates.makeDesRace = function( game, shared ) {
 	     game.physics.enable(carP, Phaser.Physics.ARCADE);
 	     game.physics.enable(carAI, Phaser.Physics.ARCADE);
 	     game.camera.follow(carP);
-		 
-		 carP.body.velocity = -1;
-		 carAI.body.velocity = -1;
 
 	     // Key Made
 	     key = game.input.keyboard;
@@ -232,6 +229,8 @@ GameStates.makeDesRace = function( game, shared ) {
 	update: function() {
 		loopMap();
 
+	    carP.body.y -= spOff;
+		carAI.body.y -= spOff
 
 	    if ( (resLock == 0 ) && key.isDown(Phaser.KeyCode.SHIFT) ) {
 			resLock = 1;
