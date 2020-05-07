@@ -54,32 +54,32 @@ GameStates.makeDesRace = function( game, shared ) {
     function reset() {
 	if ( (gs == null) && (ps == null) && (ls == null) ) {
 	    spoOff += 5;
-	    spOffAI += 10;
+	    spOffAI += 15;
 	}
 
 	if ( gs != null ) { // Good Shift
 	    gs.destroy();
 	    spOff += 15;
-	    spOffAI += 10;
+	    spOffAI = (spOffAI/2) + 10;
 	}
 
 	if ( ps != null ) { // Perfect Shift
 	    ps.destroy();
 	    spOff += 20;
-	    spOffAI += 5;
+	    spOffAI = (spOffAI/2) + 5;
 	}
 
 	if ( ls != null ) { // Late Shift
 	    ls.destroy();
 	    spOff += 5;
-	    spOffAI += 15;
+	    spOffAI += 20;
 	}
 
 	tOff = 1.7 + (2 * (gear - 1));
 	gear++;
 	esh = true, psh = false, gsh = false, lsh = false;
 	shift = game.time.events.add(Phaser.Timer.SECOND*(tOff+0.2), displayShifts, this);
-	game.time.events.add(Phaser.Timer.SECOND*(tOff/2), decLock, this);
+	game.time.events.add(Phaser.Timer.SECOND, decLock, this);
     }
 
     // Forces map to loop at a certain point to
