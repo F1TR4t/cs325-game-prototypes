@@ -1,5 +1,14 @@
 # GMU CS325 Introduction to Game Design
 
+# Purpose of Repository
+
+This repository was forked by Mustafa Fitrat, a 2018-2021 student in George Mason University for CS 325.
+This is an archived repository as this course has been completed. It remains public in case the professor
+of the course uses it as an examples, and for assisting students in understanding how to use Phaser.
+
+
+# Basic Information on Repository
+
 This repository contains all of your games as well as a few simple "hello, world!"
 templates for a game made with Phaser.
 This repository should be marked as GitHub Pages. This lets you run your games directly from github!
